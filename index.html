@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content=" user-scalable=no"> 
+        <meta name="viewport" content=" "> 
 
         <style>
          html, body 
@@ -68,11 +68,15 @@
                     }
                 });
 
+                $('td').bind('touchend', function(e) {
+                  e.preventDefault();
+                });
+
             });
         </script>
     </head>
     <body>
-        <table>
+        <table class=".no-zoom">
             <tr style="height: 20%; ">
                 <td class="display" colspan="3" style="font-weight: bold;background-color: antiquewhite; font-size: 800%;"></td>
             </tr>
