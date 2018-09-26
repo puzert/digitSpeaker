@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+         html, body 
+    {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+               height: 100%;
+                table-layout:fixed;
+                font-size: 200%;
+            }
+            
+            td {
+                border: 1px solid #dddddd;
+                text-align: center;
+                padding: 0;
+            
+            }
+        </style>
+        <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+
+                var display = $(document).find(".display")[0];
+                display.textContent = "";
+                var sounds = new Array();
+                function playSnd() {
+
+                    if (sounds.length == 0) {
+                        display.textContent = "";
+                        return;
+                    }
+                    var curSound = sounds.shift();
+                    curSound.addEventListener('ended', playSnd);
+                    curSound.play();
+                }
+                $(document).find("td").not(".display").click(function() {
+                    if ($(this).hasClass("Speak")) {
+                        if (sounds.length == 0) {
+                            var digits = display.textContent.trim();
+                            var lans = new Array("ch","en");
+                            for (var j = 0; j < lans.length; j++) {
+                                for (var i = 0; i < display.textContent.length; i++) {
+                                    var digit = digits.charCodeAt(i) - '0'.charCodeAt(0);
+                                    var audio = new Audio(lans[j] + digit + ".mp3");
+                                    sounds.push(audio);
+                                }
+                            }
+                            playSnd();
+                        }
+
+                    } else if ($(this).hasClass("Back")) {
+                        display.textContent = display.textContent.substring(0, display.textContent.length - 1);
+                    } else {
+                        display.textContent += this.textContent;
+                    }
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <table>
+            <tr style="height: 20%; padding-right: 10px;">
+                <td class="display" colspan="3" style="font-weight: bold;background-color: antiquewhite; font-size: 240%;"></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td class="Back" style="background-image: url('backspace.svg');background-repeat:no-repeat;background-position: center;    background-size:50% 50%;"></td>
+                <td>0</td>
+                <td class="Speak" style="background-image: url('speaker.svg');background-repeat:no-repeat;background-position: center;    background-size:50% 50%;"></td>
+            </tr>
+        </table>
+    </body>
+</html>
