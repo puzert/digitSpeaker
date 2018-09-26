@@ -50,11 +50,12 @@
                     if ($(this).hasClass("Speak")) {
                         if (sounds.length == 0) {
                             var digits = display.textContent.trim();
-                            var lans = new Array("ch","en");
+                            var lans = new Array("cn", "ch","en");
                             for (var j = 0; j < lans.length; j++) {
                                 for (var i = 0; i < display.textContent.length; i++) {
                                     var digit = digits.charCodeAt(i) - '0'.charCodeAt(0);
                                     var audio = new Audio(lans[j] + digit + ".mp3");
+                                    audio.playbackRate = 1.6;
                                     sounds.push(audio);
                                 }
                             }
