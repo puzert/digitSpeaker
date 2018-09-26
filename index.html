@@ -46,7 +46,7 @@
                     curSound.addEventListener('ended', playSnd);
                     curSound.play();
                 }
-                $(document).find("td").not(".display").click(function() {
+                $(document).find("td").not(".display").on("touchstart", function() {
                     if ($(this).hasClass("Speak")) {
                         if (sounds.length == 0) {
                             var digits = display.textContent.trim();
